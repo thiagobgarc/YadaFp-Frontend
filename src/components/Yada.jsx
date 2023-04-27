@@ -17,6 +17,12 @@ export const Yada = () => {
             <Text style={styles.summary}>
             These small gatherings known as Yada are to deeping spiritual knowledge and connection with God. Through home services people are set on a journey of discovering and experiencing God's love, grace, and presence. 
             </Text>
+            <Text style={styles.join}>
+                Come join us!
+            </Text>
+            <Text style={styles.schedule}>
+                We meet daily on Tuesdays at 8pm
+            </Text>
         </ScrollView>
     )
 }
@@ -48,11 +54,25 @@ const styles = StyleSheet.create({
     summary: {
         textAlign: 'center',
         color: 'black',
-        fontFamily: "Ariel",
+        fontFamily: "Arial",
         fontSize: 20,
         bottom: 335
     }, 
     background: {
         backgroundColor: 'linen',
+    }, 
+    schedule: {
+        bottom: '40%',
+        textAlign: 'center',
+        color: 'black',
+        fontSize: 20,
+        fontFamily: 'Arial'
+    },
+    join: {
+        bottom: '40%',
+        textAlign: 'center',
+        color: 'black',
+        fontSize: 50,
+        fontFamily: 'cursive'
     }
 })

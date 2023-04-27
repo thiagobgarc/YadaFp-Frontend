@@ -3,20 +3,7 @@ import { Text, Image, View, StyleSheet, ScrollView } from "react-native"
 import { Toolbar } from "./Toolbar"
 import { About } from "./About"
 
-const URL = "https://yadafb-backend.herokuapp.com/yadafp/"
-
 export const MainPage = () => {
-    const [form, setForm] = useState({})
-
-    const getForm = useCallback (async () => {
-        const form = await fetch(`${URL}`)
-        const data = await form.json()
-        setForm(data)
-    }, [])
-
-    useEffect(() => {
-        getForm()
-    }, [])
 
     return (
         <ScrollView style={styles.color}>
@@ -71,6 +58,6 @@ const styles = StyleSheet.create({
     },
     about: {
         color: 'black',
-        bottom: 200
+        
     }
 })
