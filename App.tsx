@@ -64,6 +64,13 @@ function App(): JSX.Element {
               <Tab.Screen name='Food Pantry' component={FoodPantry}/>
             </Tab.Navigator>
           </NavigationContainer>
+          {/* <NavigationContainer>
+          <Stack.Navigator>
+              <Stack.Screen name="Food Pantry" component={FoodPantry}/>
+            <Stack.Screen name='Food Form' component={FormFood}/>
+            </Stack.Navigator>
+          </NavigationContainer> */}
+
       </ScrollView>
     </SafeAreaView>
   );

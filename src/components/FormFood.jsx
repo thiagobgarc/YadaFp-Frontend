@@ -1,5 +1,7 @@
 import { TextInput, Text, ScrollView, StyleSheet } from "react-native"
 import { useEffect, useMemo, useState, useCallback } from "react"
+import { Component } from "react"
+
 
 const URL = "https://yadafb-backend.herokuapp.com/yadafp/"
 
