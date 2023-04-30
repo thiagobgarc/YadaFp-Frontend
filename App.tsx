@@ -8,6 +8,7 @@
 import React from 'react';
 import type {PropsWithChildren} from 'react';
 import {
+  Image,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -46,7 +47,14 @@ function App(): JSX.Element {
     ...styles.screen,
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
-
+  // const LogoTitle = () => {
+  //   return (
+  //     <Image
+  //     style={{ width: 50, height: 50 }}
+  //     source={{uri:'https://i.pinimg.com/564x/ff/74/0d/ff740d4a64898ed521754cf94b5cc7ed.jpg' }}
+  //     />
+  //   )
+  // }
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar
@@ -59,17 +67,50 @@ function App(): JSX.Element {
         style={backgroundStyle}>
           <NavigationContainer>
             <Tab.Navigator initialRouteName='Home'>
-              <Tab.Screen name='Yada' component={Yada}/>
-              <Tab.Screen name='Home' component={MainPage}/>
-              <Tab.Screen name='Food Pantry' component={FoodPantry}/>
+              <Tab.Screen name='Yada' component={Yada}
+              options={{ title: 'Yada', 
+              headerStyle: {
+              backgroundColor: 'white',
+              },
+              headerTintColor: 'black',
+              headerTitleStyle: {
+              fontWeight: 'bold',
+              marginLeft: 165,
+              fontFamily: 'cursive'
+              },}}
+              
+              />
+              <Tab.Screen name='Home' component={MainPage}
+              options={{
+                title: 'AGWV',
+                headerStyle: {
+                backgroundColor: 'white',
+                },
+                headerTintColor: 'black',
+                headerTitleStyle: {
+                fontWeight: 'bold',
+                marginLeft: 163.5,
+                fontFamily: 'cursive'
+                },
+              }}
+              />
+              <Tab.Screen name='Food Pantry' component={FoodPantry}
+              options={{
+                title: 'Food Pantry',
+                headerStyle: {
+                backgroundColor: 'white',
+                },
+                headerTintColor: 'black',
+                headerTitleStyle: {
+                fontWeight: 'bold',
+                marginLeft: 150,
+                fontFamily: 'cursive'
+                },
+              }} />
+              {/* <Stack.Screen name="Food Pantry" component={FoodPantry}/>
+            <Stack.Screen name='Food Form' component={FormFood}/> */}
             </Tab.Navigator>
           </NavigationContainer>
-          {/* <NavigationContainer>
-          <Stack.Navigator>
-              <Stack.Screen name="Food Pantry" component={FoodPantry}/>
-            <Stack.Screen name='Food Form' component={FormFood}/>
-            </Stack.Navigator>
-          </NavigationContainer> */}
 
       </ScrollView>
     </SafeAreaView>

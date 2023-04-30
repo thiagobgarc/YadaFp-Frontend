@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
     }, 
     background: {
         backgroundColor: 'linen',
+        flex:1
     }, 
     schedule: {
         bottom: '40%',

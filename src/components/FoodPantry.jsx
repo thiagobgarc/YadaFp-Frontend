@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     },
     background: {
         backgroundColor: 'linen',
-        // flex: 1,
+        flex: 1,
         // justifyContent: 'center'
     },
     text2: {
