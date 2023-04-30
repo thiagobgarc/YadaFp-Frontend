@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ScrollView, TextInput, Button } from "react-native"
+import { StyleSheet, Text, View, ScrollView, TextInput, Button, Pressable } from "react-native"
 import { useCallback, useMemo, useState, useEffect } from "react"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import { useNavigation } from "@react-navigation/native"
@@ -85,6 +85,11 @@ export const FoodPantry = () => {
         style={inputError}
         placeholder="date"
         />
+        <Pressable>
+            <Text onPress={getForm} style={styles.buttonSignin}>
+                Sign-in
+            </Text>
+        </Pressable>
         {/* Volunteer sign up */}
         <Text style={styles.volunteerSignup}>
             Volunteer Sign-up:
@@ -107,6 +112,11 @@ export const FoodPantry = () => {
         style={styles.volunteer}
         placeholder="date"
         />
+        <Pressable>
+            <Text onPress={getForm} style={styles.button}>
+                Sign-up
+            </Text>
+        </Pressable>
         </ScrollView>
     )
 }
@@ -127,20 +137,30 @@ const styles = StyleSheet.create({
         color: 'black',
         marginTop: 50,
         textAlign: 'center',
-        marginBottom: '200%'
+        marginBottom: '100%'
     },
     schedule: {
         textAlign: 'center',
         color: 'black',
         fontSize: 50,
         fontFamily: 'cursive',
-        bottom: 750
+        bottom: 320,
+        borderWidth: 2,
+        borderColor: 'black',
+        backgroundColor: 'white',
+        borderRadius: 15,
+        borderLeftWidth: 1,
+        borderRightWidth: 1,
     },
     schedule2: {
         textAlign: 'center',
         fontSize: 20,
-        bottom:750,
-        color: 'black'
+        bottom:322,
+        color: 'black',
+        backgroundColor: 'white',
+        borderRadius: 10,
+        borderLeftWidth: 1,
+        borderRightWidth: 1,
     },
     input: {
         borderWidth: 1,
@@ -148,24 +168,37 @@ const styles = StyleSheet.create({
         margin: 60,
         paddingVertical: 0,
         marginVertical: 0,
-        bottom: 630,
+        bottom: 240,
         backgroundColor: 'white',
         justifyContent: 'space-between',
-        marginBottom: 10
+        marginBottom: 10,
+        borderColor: 'black'
       },
       sign_in: {
         textAlign: 'center',
         fontSize: 50,
-        bottom: 650,
+        bottom: 250,
         color: 'black',
-        fontFamily: 'cursive'
+        fontFamily: 'cursive',
+        backgroundColor: 'white',
+        borderRadius: 15,
+        borderLeftWidth: 1,
+        borderRightWidth: 1,
+        borderTopColor: 'black',
+        borderTopWidth: 1
       }, 
       volunteerSignup: {
         textAlign: 'center',
         fontSize: 50,
-        bottom: 520,
+        bottom: 160,
         color: 'black',
-        fontFamily: 'cursive'
+        fontFamily: 'cursive',
+        backgroundColor: 'white',
+        borderRadius: 15,
+        borderLeftWidth: 1,
+        borderRightWidth: 1,
+        borderTopColor: 'black',
+        borderTopWidth: 1
       },
       volunteer: {
         borderWidth: 1,
@@ -173,9 +206,31 @@ const styles = StyleSheet.create({
         margin: 60,
         paddingVertical: 0,
         marginVertical: 0,
-        bottom: 520,
+        bottom: 150,
         backgroundColor: 'white',
         justifyContent: 'space-between',
         marginBottom: 10
+      },
+      button: {
+        backgroundColor: 'skyblue',
+        borderRadius: 15,
+        bottom: 140,
+        textAlign: 'center',
+        marginLeft: 100,
+        marginRight: 100,
+        borderBottomWidth: 5,
+        borderBottomColor: 'skyblue',
+        color: 'black'
+      }, 
+      buttonSignin: {
+        backgroundColor: 'skyblue',
+        borderRadius: 15,
+        bottom: 230,
+        textAlign: 'center',
+        marginLeft: 100,
+        marginRight: 100,
+        borderBottomWidth: 5,
+        borderBottomColor: 'skyblue',
+        color: 'black'
       }
 })

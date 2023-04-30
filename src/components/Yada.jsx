@@ -40,40 +40,57 @@ const styles = StyleSheet.create({
         color: 'black',
         fontFamily: "Ariel",
         fontSize: 20,
-        top: 40,
-        marginBottom: '100%'
+        top: '32%',
+        marginBottom: '100%',
+        borderTopColor: 'black',
+        borderWidth: 1,
+        marginLeft: 50,
+        marginRight: 50,
+        backgroundColor: 'white',
+        borderRadius: 15
     },
     mission: {
         fontSize: 50,
         fontFamily: 'cursive',
         color: 'black',
         textAlign: 'center',
-        bottom: 340,
-       
+        bottom: '20%',
+        backgroundColor: 'white',
+        borderRadius: 15,
+        borderLeftWidth: 1,
+        borderRightWidth: 1,
+        borderTopColor: 'black',
+        borderTopWidth: 1
     },
     summary: {
         textAlign: 'center',
         color: 'black',
         fontFamily: "Arial",
         fontSize: 20,
-        bottom: 335
+        bottom: '20%'
     }, 
     background: {
         backgroundColor: 'linen',
         flex:1
     }, 
     schedule: {
-        bottom: '40%',
+        bottom: '13.5%',
         textAlign: 'center',
         color: 'black',
         fontSize: 20,
         fontFamily: 'Arial'
     },
     join: {
-        bottom: '40%',
+        bottom: '13.5%',
         textAlign: 'center',
         color: 'black',
         fontSize: 50,
-        fontFamily: 'cursive'
+        fontFamily: 'cursive',
+        backgroundColor: 'white',
+        borderRadius: 15,
+        borderLeftWidth: 1,
+        borderRightWidth: 1,
+        borderTopColor: 'black',
+        borderTopWidth: 1
     }
 })
