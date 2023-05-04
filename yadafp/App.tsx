@@ -32,7 +32,7 @@ import { Yada } from './src/components/Yada';
 import { MainPage } from './src/components/MainPage';
 import { FoodPantry } from './src/components/FoodPantry';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
+import { FormFood } from './src/components/FormFood';
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;

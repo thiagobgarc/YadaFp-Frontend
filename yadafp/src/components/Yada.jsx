@@ -1,10 +1,10 @@
-import { StyleSheet, Text, View, ScrollView } from "react-native"
+import { StyleSheet, Text, View, ScrollView, Image } from "react-native"
 import {images} from '../'
 
 export const Yada = () => {
     return (
         <ScrollView style={styles.background}>
-           
+           <Image source={{uri: 'https://scontent-lga3-1.xx.fbcdn.net/v/t39.30808-6/326730766_696903221912998_3493565974473042807_n.png?_nc_cat=106&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=oEGfU9eawT0AX96aZoU&_nc_oc=AQn02JFW-pDFNdwdcC08s0vBTVDBaDIcq-5ea2go8rKEuLaAhNvYF7sbvzF7Vjx7Drg&_nc_ht=scontent-lga3-1.xx&oh=00_AfA6QkCGT8cc6YWgEaI7JHax9OWHvg38IAuvRlQUoYvqsA&oe=645989DE'}} style={styles.image}/>
             {/* <Text style={styles.text}>
                 Yada
             </Text> */}
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
         color: 'black',
         fontFamily: "Ariel",
         fontSize: 20,
-        top: '32%',
+        bottom: '27%',
         marginBottom: '100%',
         borderTopColor: 'black',
         borderWidth: 1,
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
         fontFamily: 'cursive',
         color: 'black',
         textAlign: 'center',
-        bottom: '20%',
+        bottom: '55%',
         backgroundColor: 'white',
         borderRadius: 15,
         borderLeftWidth: 1,
@@ -67,21 +67,23 @@ const styles = StyleSheet.create({
         color: 'black',
         fontFamily: "Arial",
         fontSize: 20,
-        bottom: '20%'
+        bottom: '53%',
+        fontWeight: 'bold'
     }, 
     background: {
         backgroundColor: 'linen',
         flex:1
     }, 
     schedule: {
-        bottom: '13.5%',
+        bottom: '50%',
         textAlign: 'center',
         color: 'black',
         fontSize: 20,
-        fontFamily: 'Arial'
+        fontFamily: 'Arial',
+        fontWeight: 'bold'
     },
     join: {
-        bottom: '13.5%',
+        bottom: '50%',
         textAlign: 'center',
         color: 'black',
         fontSize: 50,
@@ -92,5 +94,13 @@ const styles = StyleSheet.create({
         borderRightWidth: 1,
         borderTopColor: 'black',
         borderTopWidth: 1
+    },
+    image: {
+        width: 200,
+        height: 200,
+        borderRadius: 150,
+        left: '25%',
+        top: '2%',
+        marginBottom: '100%'
     }
 })

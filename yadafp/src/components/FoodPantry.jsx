@@ -2,47 +2,79 @@ import { useState, useEffect } from 'react';
 import { ScrollView, Text, TextInput, Button, View, StyleSheet, Pressable } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+const URL = 'https://yadafp-backend.herokuapp.com/yada/'
+
 export const FoodPantry = () => {
-    const [inputValue, setInputValue] = useState('')
-    const [data, setData] = useState([])
+  // DATA STATE
+  const [data, setdata] = useState([])
+  // NAME STATE
+  const [newName, setNewName] = useState('')
+  // PHONE STATE
+  const [newPhone, setNewPhone] = useState('')
 
-    const getData = async() => {
-        try{
-            const storedData = await AsyncStorage.getItem('data')
+// DECLARES FUNCTION AT getData
+  const getData = () => {
+    // GET REQUEST
+    fetch(`${URL}`)
+      // PROMISE RETURN BY FETCH
+      .then(resp => resp.json())
+      .then(data => {
+        console.log('data:', data)
+        // UPDATE STATE WITH FETCH DATA
+        setdata(data)
+      })
+      .catch(error => console.error(error))
+  }
+// HANDLE NAME CHANGES 
+  const handleNameChange = (text) => {
+    setNewName(text)
+  }
+// HANDLE PHONE CHANGES
+  const handlePhoneChange = (text) => {
+    setNewPhone(text)
+  }
 
-            if(storedData !== null){
-                setData(JSON.parse(storedData))
-            }
-        } catch(err) {
-            console.log(err)
-        }
-    }
+  const handleSubmit = async () => {
+    // LOG NEW NAME
+    console.log('New name:', newName);
+    // LOG NEW PHONE
+    console.log('New phone:', newPhone);
+    // RESPONSE FETCH URL
+    const response = await fetch(`${URL}`, {
+        // METHOD POST
+      method: 'POST',
+    // STRAIGHT FORWARD HEADERS
+      headers:{
+        // ACCEPTS APPLICATION/JSON AND CONTENT-TYPE 
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+    // CONVERT JS OBJECT TO JSON STRING USING STRINGIFY
+      body: JSON.stringify({ name: newName, phone: newPhone })
+    })
+  
+    console.log('Response:', response)
+    // EXTRACT AND PARSE JSON BODY OF HTTP RESPONSE
+    const json = await response.json()
+    // LOG NEW DATA AT JSON
+    console.log('New data:', json)
+    // STATE UPDATE
+    setNewName('')
+    setNewPhone('')
+    // RESPONSE TO USER INPUT
+    getData()
+  };
+  
+  
 
-    useEffect(() => {
-        getData()
-    }, [])
-
-    const handleInput = (value) => {
-        setInputValue(value)
-    } 
-
-    const saveData = async() => {
-      try{
-        const newItem = { id: Date.now(), title: inputValue }
-        const newData = [...data, newItem]
-        await AsyncStorage.setItem('data', JSON.stringify(newData))
-        setData(newData)
-        setInputValue('')
-      } catch (err) {
-        console.log(err)
-      }
-    }
+  useEffect(() => {
+    getData()
+  }, [])
 
   return (
     <ScrollView style={styles.background}>
-      <Text style={styles.text}>Food Pantry</Text>
       <Text style={styles.text2}>
-        Our Food pantry welcomes both volunteers and those in need of assistance. As a volunteer, you have the opportunity to serve and demonstrate Christ's love by providing nourishing food to those who are struggling. If you are in need of assistance, the food pantry provides a welcoming and supportive environment where you can receive physical nourishment and also experience the love of God through the kindness of others.
+        Our food pantry welcomes both volunteers and those in need of assistance. As a volunteer, you have the opportunity to serve and demonstrate Christ's love by providing nourishing food to those who are struggling. If you are in need of assistance, the food pantry provides a welcoming and supportive environment where you can receive physical nourishment and also experience the love of God through the kindness of others.
       </Text>
       <Text style={styles.schedule}>Schedule:</Text>
       <Text style={styles.schedule2}>Saturdays: 9am to 1:30pm</Text>
@@ -50,21 +82,31 @@ export const FoodPantry = () => {
       <Text style={styles.sign_in}>Food Pantry Sign-in:</Text>
       <TextInput
       placeholder='Enter Name'
-      value={inputValue}
-      onChangeText={handleInput}
+      value={newName}
+      onChangeText={handleNameChange}
       style={styles.input}
       />
 
+      <TextInput
+        placeholder="Phone Here"
+        value={newPhone}
+        onChangeText={handlePhoneChange}
+        style={styles.input}
+      />
       <Pressable>
-        <Text style={styles.buttonSignin} onPress={saveData}>
-          Add Name
+        <Text
+        title="Submit"
+        onPress={handleSubmit}
+        style={styles.buttonSignin}>
+          Submit
         </Text>
       </Pressable>
       
+
       {data.map((item) => {
         return (
     <View key={item.id}>
-      <Text style={styles.displayName}>{item.title}</Text>
+      <Text style={styles.displayName}>{item.name} {item.phone}</Text>
     </View>
         )
   })}
@@ -90,7 +132,8 @@ const styles = StyleSheet.create({
         color: 'black',
         marginTop: 50,
         textAlign: 'center',
-        marginBottom: '100%'
+        marginBottom: '100%',
+        fontWeight: 'bold'
     },
     schedule: {
         textAlign: 'center',
@@ -189,6 +232,7 @@ const styles = StyleSheet.create({
       displayName: {
         textAlign: 'center',
         fontSize: 25,
-        bottom: 250
+        bottom: 220,
+        color:'black'
       }
 })
