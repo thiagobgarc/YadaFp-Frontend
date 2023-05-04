@@ -92,6 +92,7 @@ export const FoodPantry = () => {
         value={newPhone}
         onChangeText={handlePhoneChange}
         style={styles.input}
+        keyboardType='phone-pad'
       />
       <Pressable>
         <Text
