@@ -3,39 +3,40 @@ import { ScrollView, Text, TextInput, Button, View, StyleSheet, Pressable } from
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const FoodPantry = () => {
-  const [inputValue, setInputValue] = useState('');
-  const [data, setData] = useState([]);
+    const [inputValue, setInputValue] = useState('')
+    const [data, setData] = useState([])
 
-  const getData = async() => {
-    try {
-      const storedData = await AsyncStorage.getItem('data');
-      if(storedData !== null){
-        setData(JSON.parse(storedData));
+    const getData = async() => {
+        try{
+            const storedData = await AsyncStorage.getItem('data')
+
+            if(storedData !== null){
+                setData(JSON.parse(storedData))
+            }
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+    useEffect(() => {
+        getData()
+    }, [])
+
+    const handleInput = (value) => {
+        setInputValue(value)
+    } 
+
+    const saveData = async() => {
+      try{
+        const newItem = { id: Date.now(), title: inputValue }
+        const newData = [...data, newItem]
+        await AsyncStorage.setItem('data', JSON.stringify(newData))
+        setData(newData)
+        setInputValue('')
+      } catch (err) {
+        console.log(err)
       }
-    } catch (err) {
-      console.log(err);
     }
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
-
-  const handleInput = (value) => {
-    setInputValue(value);
-  } 
-   
-  const saveData = async () => {
-    try {
-      const newItem = { id: Date.now(), title: inputValue };
-      const newData = [...data, newItem];
-      await AsyncStorage.setItem('data', JSON.stringify(newData));
-      setData(newData);
-      setInputValue('');
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
   return (
     <ScrollView style={styles.background}>
@@ -48,19 +49,28 @@ export const FoodPantry = () => {
 
       <Text style={styles.sign_in}>Food Pantry Sign-in:</Text>
       <TextInput
-        placeholder="Enter Name"
-        value={inputValue}
-        onChangeText={handleInput}
-        style={styles.input}
+      placeholder='Enter Name'
+      value={inputValue}
+      onChangeText={handleInput}
+      style={styles.input}
       />
-      <Button onPress={saveData} title='Add Name' style={styles.buttonSignin}/>
 
-      {data.map((item) => (
-        <View key={item.id} >
-          <Text style={styles.displayName}>{item.title}</Text>
-        </View>
-      ))}
+      <Pressable>
+        <Text style={styles.buttonSignin} onPress={saveData}>
+          Add Name
+        </Text>
+      </Pressable>
+      
+      {data.map((item) => {
+        return (
+    <View key={item.id}>
+      <Text style={styles.displayName}>{item.title}</Text>
+    </View>
+        )
+  })}
+ 
     </ScrollView>
+
   );
 };
 
@@ -168,7 +178,7 @@ const styles = StyleSheet.create({
       buttonSignin: {
         backgroundColor: 'skyblue',
         borderRadius: 15,
-        bottom: 230,
+        bottom: 240,
         textAlign: 'center',
         marginLeft: 100,
         marginRight: 100,
@@ -179,6 +189,6 @@ const styles = StyleSheet.create({
       displayName: {
         textAlign: 'center',
         fontSize: 25,
-        bottom: 260
+        bottom: 250
       }
 })
