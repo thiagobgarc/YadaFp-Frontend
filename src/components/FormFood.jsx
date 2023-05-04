@@ -1,70 +1,72 @@
 import { TextInput, Text, ScrollView, StyleSheet } from "react-native"
 import { useEffect, useMemo, useState, useCallback } from "react"
 import { Component } from "react"
+import AsyncStorage from "@react-native-async-storage/async-storage"
+
 
 
 const URL = "https://yadafb-backend.herokuapp.com/yadafp/"
 
 export const FormFood = () => {
-
-    const [form, setForm] = useState({})
-    const [inputState, setInputState] = useState('')
-    const [inputStyle, setInputStyle] = useState(false)
-
-    const updateTextInput = useCallback((textValue) => {
-        setInputState((prev) => textValue)
-    }, [])
-
-    const getForm = useCallback (async () => {
-        const form = await fetch(`${URL}`)
-        const data = await form.json()
-        setForm(data)
-    }, [])
-
+    const [inputValue, setInputValue] = useState('');
+    const [data, setData] = useState([]);
+  
+    const getData = async() => {
+      try {
+        const storedData = await AsyncStorage.getItem('data');
+        if(storedData !== null){
+          setData(JSON.parse(storedData));
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+  
     useEffect(() => {
-        getForm()
-    }, [])
-
-    const inputError = useMemo(() => ({
-        ...styles.input,
-        borderColor: inputStyle ? 'red' : 'gray'
-      }), [inputStyle])
-
+      getData();
+    }, []);
+  
+    const handleInput = (value) => {
+      setInputValue(value);
+    } 
+     
+    const saveData = async () => {
+      try {
+        const newItem = { id: Date.now(), title: inputValue };
+        const newData = [...data, newItem];
+        await AsyncStorage.setItem('data', JSON.stringify(newData));
+        setData(newData);
+        setInputValue('');
+      } catch (err) {
+        console.log(err);
+      }
+    };
+  
     return (
-        <ScrollView>
-        <Text style={styles.sign_in}>
-            Food Pantry Sign-in:
+      <ScrollView style={styles.background}>
+        <Text style={styles.text}>Food Pantry</Text>
+        <Text style={styles.text2}>
+          Our Food pantry welcomes both volunteers and those in need of assistance. As a volunteer, you have the opportunity to serve and demonstrate Christ's love by providing nourishing food to those who are struggling. If you are in need of assistance, the food pantry provides a welcoming and supportive environment where you can receive physical nourishment and also experience the love of God through the kindness of others.
         </Text>
+        <Text style={styles.schedule}>Schedule:</Text>
+        <Text style={styles.schedule2}>Saturdays: 9am to 1:30pm</Text>
+  
+        <Text style={styles.sign_in}>Food Pantry Sign-in:</Text>
         <TextInput
-        onPress={updateTextInput}
-        value={inputState}
-        style={inputError}
+          placeholder="Enter Name"
+          value={inputValue}
+          onChangeText={handleInput}
+          style={styles.input}
         />
-        <TextInput
-        onPress={updateTextInput}
-        value={inputState}
-        style={inputError}
-        />
-        <TextInput
-        onPress={updateTextInput}
-        value={inputState}
-        style={inputError}
-        />
-        <TextInput
-        onPress={updateTextInput}
-        value={inputState}
-        style={inputError}
-        />
-        <TextInput
-        onPress={updateTextInput}
-        value={inputState}
-        style={inputError}
-        />
-        <TextInput
-        onPress={updateTextInput}
-        value={inputState}
-        style={inputError}
-        />
+        <Pressable>
+          <Text style={styles.buttonSignin} onPress={saveData}>Add name</Text>
+        </Pressable>
+  
+        {data.map((item) => (
+          <View key={item.id} >
+            <Text style={styles.displayName}>{item.title}</Text>
+          </View>
+        ))}
         </ScrollView>
     )
 }
